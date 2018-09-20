@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Magic Select Box</title>
+<meta charset="UTF-8">
+<link href="css/style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<div style="display:block; width:300px;">
+<div class="magicScroll">
+<select >
+	<option data-before="<i class='fa fa-home'></i>11" value="1"> Nepal </option>
+	<option data-after="<span>+</span>" value="2"> There are many variations of passages of Lorem Ipsum available </option>
+	<option value="3" data-after="<i class='fa fa-check-circle-o'></i>"> India </option>
+	
+</select>
+
+</div>
+</div>
+
+<br /> <br />
+
+<div class="magicScroll">
+ <select id="allowedunits" name="allowedunits" multiple>
+  <option value="1" selected> Miner </option>
+  <option value="2" selected> Puffer </option>
+  <option value="3" > Snipey </option>
+  <option value="4" > Max </option>
+  <option value="5" selected> Firebot </option>
+ </select>
+</div>
+
+
+
+<script src="js/magicScrollBox.js"></script>
+<script>
+var multi = document.getElementById("allowedunits");
+console.log(multi);
+</script>
+</body>
+</html>

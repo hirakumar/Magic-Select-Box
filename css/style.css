@@ -1,0 +1,15 @@
+.magicScroll .selected{border:solid 1px #ccc; padding:0px;  display: flex; position:relative; cursor:pointer;min-width: 200px;justify-content: space-between;}
+.magicScroll .selected .arrow{padding:6px 10px; border-left:solid 1px #ccc; display:inline-block; cursor:pointer}
+.magicScroll .selected .innerCont{padding:5px 10px; display:flex; flex-direction:row}
+.magicScroll .selected .innerCont .block{display:flex; padding:5px 10px; border:solid 1px #ccc; margin:0 1px; border-radius:20px;}
+.magicScroll ul.clone{ margin:0px; min-width:200px; padding:0px; border-top:solid 1px #ccc; opacity:1; z-index:-1; display:none; flex-direction: column; list-style:none; position:absolute; left:0px; top:43px; width:100%;}
+.magicScroll ul.clone li{cursor:pointer; display:flex; background:#fff; z-index:9; flex-direction:row;padding:5px; border-bottom:solid 1px #ccc; border-right:solid 1px #ccc; border-left:solid 1px #ccc; padding-right:30px}
+.magicScroll ul.clone li .before{padding-left:5px; padding-right:5px; display:flex; flex-direction:row}
+.magicScroll ul.clone li .after{padding-left:5px; padding-right:5px;}
+.magicScroll ul.clone li:hover {background:#f4f4f4}
+.magicScroll select{position: absolute; opacity:1; z-index:-1; left:300px}
+.magicScroll {position: relative; display: flex; flex-direction: column;}
+.magicScroll.showList ul.clone{ opacity:1; z-index:9; display:flex}
+.select-one .block{
+	border:none
+}
