@@ -1,7 +1,9 @@
 body{font-size:14px; font-family: arial}
 .magicScroll .selected{border:solid 1px #ccc; padding:0px;  display: flex; position:relative; cursor:pointer;min-width: 200px;justify-content: space-between;}
 .magicScroll .selected .arrow{padding:9px 10px; border-left:solid 1px #ccc; display:inline-block; cursor:pointer}
-.magicScroll .selected .innerCont{padding:5px 10px; display:flex; flex-direction:row}
+.magicScroll .selected .fa-close{color:#e7384d}
+.magicScroll .selected .innerCont{padding:5px 0px; display:flex; flex-direction:row}
+.magicScroll.select-multiple .selected .innerCont{padding:5px 10px;}
 .magicScroll .selected .innerCont .block{display:flex; padding:3px 5px; font-size:12px; border:solid 1px #ccc; margin:0 1px; border-radius:20px;}
 .magicScroll .selected .innerCont .block .main{padding-right:5px;}
 .magicScroll .selected .innerCont .block .before{padding-right:5px;}
@@ -11,7 +13,8 @@ body{font-size:14px; font-family: arial}
 .magicScroll ul.clone li .before{padding-left:5px; padding-right:5px; display:flex; flex-direction:row}
 .magicScroll ul.clone li .after{padding-left:5px; padding-right:5px;}
 .magicScroll ul.clone li:hover {background:#f4f4f4}
-.magicScroll select{position: absolute; opacity:1; z-index:-1; left:300px; display:block}
+.magicScroll ul.clone li {font-size:12px;}
+.magicScroll select{position: absolute; opacity:1; z-index:-1; left:300px; display:none}
 .magicScroll {position: relative; display: flex; flex-direction: column;}
 .magicScroll.showList ul.clone{ opacity:1; z-index:9; display:flex}
 .select-one .block{
