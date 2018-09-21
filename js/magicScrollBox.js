@@ -14,42 +14,19 @@ class MagicScroll {
 	mydata(){
 		return this.defaultData;
 	}
-	changeSelected (e){
-		let parentEle= e.target;
-		//console.log(e.target.selectedIndex);
-		console.log(this.selectedOptions);
-
-		let ele = this.parentElement.querySelector('.selected .innerCont');
-		let innerdata='';
-				let k=0;
-				while(k<this.selectedOptions.length){
-
-					if(this.selectedOptions[k] != undefined) {
-						let txt ='<div class="block">';
-
-						if(this.selectedOptions[k].dataset.before!=undefined){
-							txt+='<span class="before">'+this.selectedOptions[k].dataset.before+'</span>';
-						}
-						txt+='<span class="main">'+this.selectedOptions[k].innerHTML+'</span>';
-						if(this.selectedOptions[k].dataset.after!=undefined){
-							txt+='<span class="after">'+this.selectedOptions[k].dataset.after+'</span>';
-						}
-						txt +='</div>';
-						innerdata+=txt;
-					}
-					k++;
-				}
-
-				ele.innerHTML=(innerdata=='') ? "Choose One" : innerdata;
+	changeSelected (){
+	
 	}
 	hideList(e){
 		e.currentTarget.classList.remove('showList');
 	}
 	passEventToSelectBox(e){
-		console.log(e.currentTarget.firstChild);
+		console.log("passEventToSelectBox");
+
 		let patt = /fa-check-circle-o/g;
 		var selectBox = e.currentTarget.parentElement.parentElement.querySelector('SELECT');
-		if(selectBox.type=="select-multiple") {
+		var inputBox = e.currentTarget.parentElement.parentElement.querySelector('.selected');
+	if(selectBox.type=="select-multiple") {
 			if(patt.test(e.currentTarget.firstChild.className)==true){
 				e.currentTarget.firstChild.classList.add('fa-circle-o');
 				e.currentTarget.firstChild.classList.remove('fa-check-circle-o');
@@ -71,7 +48,8 @@ class MagicScroll {
 			}
 			i++;
 		}
-
+		let ele = inputBox.querySelector('.innerCont');
+		this.fillDataOnSelected(ele,selectBox.selectedOptions);
 		selectBox.dispatchEvent(new Event('change'));
 		if(selectBox.type=="select-one") {
 			e.currentTarget.parentElement.parentElement.classList.remove('showList');
@@ -84,22 +62,23 @@ class MagicScroll {
 				let innerdata='';
 				let i=0;
 				console.log("I have "+data.length);
-
+				// Making Empty while filling blocks
+				ele.innerHTML='';
 				while(i<data.length){
 
 						if(data[i].value!=undefined || data[i].value!=null) {
 							let block = document.createElement("DIV");
-							block.setAttribute("data-index",data[i].index);
-							block.classList.add('block');
+							block.addEventListener('click',function(e){
+								console.log(e.currentTarget.dataset.index)
+								let selectBox = e.currentTarget.parentElement.parentElement.parentElement.querySelector('SELECT');
+							selectBox[e.currentTarget.dataset.index].selected=false;
 
-						//	let selectBox =e.currentTarget.parentElement.parentElement.parentElement.querySelector('SELECT');
-							/*block.addEventListener('click',function(e){
-								let selectBox =e.currentTarget.parentElement.parentElement.parentElement.querySelector('SELECT');
-								//selectBox[0].selected=false;
-								console.log(e.target);
-								selectBox[0].selected=false;
-								selectBox.dispatchEvent(new Event('change'));
-							})*/
+							selectBox.dispatchEvent(new Event('change'));
+							console.log(selectBox);
+							})
+							block.setAttribute("data-index",data[i].index);
+
+							block.classList.add('block');
 
 						 // Check Box
 						 console.log(this)
@@ -120,6 +99,7 @@ class MagicScroll {
 								afterDiv.innerHTML="<span class='after'>"+data[i].dataset.after+"</span>";
 								block.appendChild(afterDiv.firstChild);
 							}
+
 							ele.appendChild(block);
 						}
 
@@ -148,38 +128,33 @@ class MagicScroll {
 		let j=0;
 		while(j<this.allEle.length){
 
-			console.log(this.allEle[j].children.length);
 			this.allEle[j].addEventListener("mouseleave",this.hideList);
-			console.log(this.allEle[j]);
 			this.allEle[j].classList.add(this.allEle[j].querySelector('SELECT').type);
-			var selectedIndex =this.allEle[j].querySelector('select').selectedOptions;
-			console.log(selectedIndex);
 
 
-			let selectBox=this.allEle[j].querySelector('select');
-
-			selectBox.addEventListener("change",this.changeSelected);
 
 			// InputBox
 			let inputBox = document.createElement("DIV");
 			inputBox.className="selected";
 			inputBox.addEventListener("click",this.showHideList);
 
+			var selectedIndex =this.allEle[j].querySelector('select').selectedOptions;
+			let selectBox=this.allEle[j].querySelector('select');
+		//	let ele = inputBox.querySelector('.innerCont');
+		//	selectBox.addEventListener("change",this.fillDataOnSelected(inputBox.querySelector('.innerCont'),selectBox.selectedOptions));
+
 			let innerCont = document.createElement("SPAN");
 			innerCont.className="innerCont";
 			inputBox.appendChild(innerCont);
-
+			// Arrow Button
 			let arrowBtn = document.createElement("I");
 			arrowBtn.className="fa fa-angle-down arrow";
 
 			inputBox.appendChild(arrowBtn);
-
-
 			this.allEle[j].appendChild(inputBox);
 
 
 			let ul = document.createElement("UL");
-
 			let i=0;
 
 			let selectedOptions=[];
@@ -188,7 +163,7 @@ class MagicScroll {
 				let li = document.createElement('LI');
 				li.setAttribute('data-index',i);
 
-				li.addEventListener('click',this.passEventToSelectBox);
+				li.addEventListener('click',this.passEventToSelectBox.bind(this));
 
 
 				//Check Box
@@ -228,9 +203,6 @@ class MagicScroll {
 				}
 
 				// Seting Selected Value on Selected Box
-
-
-
 				ul.appendChild(li);
 				i++;
 			}
@@ -240,13 +212,8 @@ class MagicScroll {
 			console.log(selectedIndex.length);
 			let ele = inputBox.querySelector('.innerCont');
 			this.fillDataOnSelected(ele,selectedIndex);
-
-
-
-
-
 			ul.className="clone";
-			console.log(ul);
+
 			this.allEle[j].appendChild(ul);
 			j++;
 		}

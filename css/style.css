@@ -11,7 +11,7 @@ body{font-size:14px; font-family: arial}
 .magicScroll ul.clone li .before{padding-left:5px; padding-right:5px; display:flex; flex-direction:row}
 .magicScroll ul.clone li .after{padding-left:5px; padding-right:5px;}
 .magicScroll ul.clone li:hover {background:#f4f4f4}
-.magicScroll select{position: absolute; opacity:1; z-index:-1; left:300px; display:none}
+.magicScroll select{position: absolute; opacity:1; z-index:-1; left:300px; display:block}
 .magicScroll {position: relative; display: flex; flex-direction: column;}
 .magicScroll.showList ul.clone{ opacity:1; z-index:9; display:flex}
 .select-one .block{
